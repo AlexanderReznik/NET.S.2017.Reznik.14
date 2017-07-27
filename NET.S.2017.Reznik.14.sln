@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fibonacci", "Fibonacci\Fibonacci.csproj", "{37C05483-D45F-4AFB-87DC-32069D035DA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericCollection", "GenericCollection\GenericCollection.csproj", "{E9689A37-0C27-4841-831A-EE143BEA1B0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericCollection.NUnitTests", "GenericCollection.NUnitTests\GenericCollection.NUnitTests.csproj", "{B5DC467B-729B-4CC0-AD90-CC4E346B60F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{37C05483-D45F-4AFB-87DC-32069D035DA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37C05483-D45F-4AFB-87DC-32069D035DA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37C05483-D45F-4AFB-87DC-32069D035DA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37C05483-D45F-4AFB-87DC-32069D035DA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9689A37-0C27-4841-831A-EE143BEA1B0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9689A37-0C27-4841-831A-EE143BEA1B0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9689A37-0C27-4841-831A-EE143BEA1B0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9689A37-0C27-4841-831A-EE143BEA1B0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5DC467B-729B-4CC0-AD90-CC4E346B60F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5DC467B-729B-4CC0-AD90-CC4E346B60F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5DC467B-729B-4CC0-AD90-CC4E346B60F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5DC467B-729B-4CC0-AD90-CC4E346B60F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -226,6 +226,11 @@ namespace GenericCollection
             return ans;
         }
 
+        /// <summary>
+        /// Equals
+        /// </summary>
+        /// <param name="other">set to compare with</param>
+        /// <returns>true if equals</returns>
         public bool Equals(Set<T> other)
         {
             if(ReferenceEquals(other, null)) throw new ArgumentNullException();

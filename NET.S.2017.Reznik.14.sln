@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericCollection", "Generi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericCollection.NUnitTests", "GenericCollection.NUnitTests\GenericCollection.NUnitTests.csproj", "{B5DC467B-729B-4CC0-AD90-CC4E346B60F1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericMatrix", "GenericMatrix\GenericMatrix.csproj", "{87EE5788-1D89-4C68-BE35-0B83A7F1E45C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericMatrix.NUnitTests", "GenericMatrix.NUnitTests\GenericMatrix.NUnitTests.csproj", "{118DF18D-FA44-4A72-A5A6-8F322D5B6324}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{B5DC467B-729B-4CC0-AD90-CC4E346B60F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5DC467B-729B-4CC0-AD90-CC4E346B60F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5DC467B-729B-4CC0-AD90-CC4E346B60F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87EE5788-1D89-4C68-BE35-0B83A7F1E45C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87EE5788-1D89-4C68-BE35-0B83A7F1E45C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87EE5788-1D89-4C68-BE35-0B83A7F1E45C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87EE5788-1D89-4C68-BE35-0B83A7F1E45C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{118DF18D-FA44-4A72-A5A6-8F322D5B6324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{118DF18D-FA44-4A72-A5A6-8F322D5B6324}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{118DF18D-FA44-4A72-A5A6-8F322D5B6324}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{118DF18D-FA44-4A72-A5A6-8F322D5B6324}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,8 +7,18 @@ using System.Threading.Tasks;
 
 namespace GenericMatrix
 {
+    /// <summary>
+    /// Operations on matrix
+    /// </summary>
     public static class MatrixOperations
     {
+        /// <summary>
+        /// Adding matrix
+        /// </summary>
+        /// <typeparam name="T">Param of matrix</typeparam>
+        /// <param name="lhs">First matrix</param>
+        /// <param name="rhs">Second matrix</param>
+        /// <returns>Sum of the first and the second</returns>
         public static DiagonalMatrix<T> Sum<T>(DiagonalMatrix<T> lhs, DiagonalMatrix<T> rhs)
         {
             Check(lhs, rhs);
@@ -18,6 +28,13 @@ namespace GenericMatrix
             return answer;
         }
 
+        /// <summary>
+        /// Adding matrix
+        /// </summary>
+        /// <typeparam name="T">Param of matrix</typeparam>
+        /// <param name="lhs">First matrix</param>
+        /// <param name="rhs">Second matrix</param>
+        /// <returns>Sum of the first and the second</returns>
         public static SymetricMatrix<T> Sum<T>(SymetricMatrix<T> lhs, SymetricMatrix<T> rhs)
         {
             Check(lhs, rhs);
@@ -28,6 +45,13 @@ namespace GenericMatrix
             return answer;
         }
 
+        /// <summary>
+        /// Adding matrix
+        /// </summary>
+        /// <typeparam name="T">Param of matrix</typeparam>
+        /// <param name="lhs">First matrix</param>
+        /// <param name="rhs">Second matrix</param>
+        /// <returns>Sum of the first and the second</returns>
         public static SquareMatrix<T> Sum<T>(SquareMatrix<T> lhs, SquareMatrix<T> rhs)
         {
             Check(lhs, rhs);

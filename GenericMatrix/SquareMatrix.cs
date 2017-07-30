@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace GenericMatrix
 {
+    /// <summary>
+    /// Square matrix
+    /// </summary>
+    /// <typeparam name="T">Param</typeparam>
     public class SquareMatrix<T> : AbstractMatrix<T>
     {
         #region fields
@@ -21,9 +25,22 @@ namespace GenericMatrix
         /// </summary>
         public int Size => _size;
 
+        /// <summary>
+        /// Number of rows
+        /// </summary>
         public override int M => Size;
+
+        /// <summary>
+        /// Number of columns
+        /// </summary>
         public override int N => Size;
 
+        /// <summary>
+        /// Indexer
+        /// </summary>
+        /// <param name="i">row</param>
+        /// <param name="j">column</param>
+        /// <returns>Element</returns>
         public override T this[int i, int j]
         {
             get
@@ -43,6 +60,10 @@ namespace GenericMatrix
 
         #region C-tor
 
+        /// <summary>
+        /// C-tor
+        /// </summary>
+        /// <param name="size">Size</param>
         public SquareMatrix(int size) : this(size, size * size) { }
 
         protected SquareMatrix(int size, int arraydimension) : base(size, size, arraydimension)

@@ -6,12 +6,26 @@ using System.Threading.Tasks;
 
 namespace GenericMatrix
 {
+    /// <summary>
+    /// Abstract matrix
+    /// </summary>
+    /// <typeparam name="T">Param</typeparam>
     public class DiagonalMatrix<T> : SymetricMatrix<T>
     {
+        /// <summary>
+        /// C-tor
+        /// </summary>
+        /// <param name="size"></param>
         public DiagonalMatrix(int size) : this(size, size) { }
 
         protected DiagonalMatrix(int size, int arraydimension) : base(size, arraydimension) { }
 
+        /// <summary>
+        /// Indexer
+        /// </summary>
+        /// <param name="i">row</param>
+        /// <param name="j">column</param>
+        /// <returns>Element</returns>
         public override T this[int i, int j]
         {
             get

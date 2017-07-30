@@ -6,17 +6,29 @@ using System.Threading.Tasks;
 
 namespace GenericMatrix
 {
+    /// <summary>
+    /// Abstract matrix
+    /// </summary>
+    /// <typeparam name="T">Param</typeparam>
     public abstract class AbstractMatrix<T>
     {
         #region fields
 
         private readonly T[] _array;
+        /// <summary>
+        /// Event
+        /// </summary>
         public event EventHandler<ChangeEventArgs> Change = delegate { };
 
         #endregion
 
         #region Properties
-
+        /// <summary>
+        /// Indexer
+        /// </summary>
+        /// <param name="i">row</param>
+        /// <param name="j">column</param>
+        /// <returns>Element</returns>
         public virtual T this[int i, int j] {
             get
             {
@@ -30,7 +42,13 @@ namespace GenericMatrix
                 OnChange(new ChangeEventArgs(i, j, "Matrix"));
             }
         }
+        /// <summary>
+        /// Number of rows
+        /// </summary>
         public virtual int M { get; }
+        /// <summary>
+        /// Number of columns
+        /// </summary>
         public virtual int N { get; }
         protected T[] Array => _array;
 
@@ -44,6 +62,10 @@ namespace GenericMatrix
             N = n;
         }
 
+        /// <summary>
+        /// String representation
+        /// </summary>
+        /// <returns>String</returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

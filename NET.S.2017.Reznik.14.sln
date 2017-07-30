@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericMatrix", "GenericMat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericMatrix.NUnitTests", "GenericMatrix.NUnitTests\GenericMatrix.NUnitTests.csproj", "{118DF18D-FA44-4A72-A5A6-8F322D5B6324}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericBinarySearchTree", "GenericBinarySearchTree\GenericBinarySearchTree.csproj", "{9AC3D380-53C4-423D-9253-8143B1472C8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{118DF18D-FA44-4A72-A5A6-8F322D5B6324}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{118DF18D-FA44-4A72-A5A6-8F322D5B6324}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{118DF18D-FA44-4A72-A5A6-8F322D5B6324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AC3D380-53C4-423D-9253-8143B1472C8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AC3D380-53C4-423D-9253-8143B1472C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AC3D380-53C4-423D-9253-8143B1472C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AC3D380-53C4-423D-9253-8143B1472C8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

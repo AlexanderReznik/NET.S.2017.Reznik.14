@@ -29,7 +29,10 @@ namespace GenericBinarySearchTree
         /// </summary>
         public BinarySearchTree()
         {
-            Root = null;
+            if (!(typeof(T).GetInterfaces().Contains(typeof(IComparable)) || typeof(T).GetInterfaces().Contains(typeof(IComparable<T>))
+                || typeof(T).GetInterfaces().Contains(typeof(IComparer)) || typeof(T).GetInterfaces().Contains(typeof(IComparer<T>))))
+                throw new InvalidOperationException("No default comparer. Use another c-tor.");
+                Root = null;
             _comparer = Comparer<T>.Default;
         }
 
@@ -40,7 +43,12 @@ namespace GenericBinarySearchTree
         public BinarySearchTree(IComparer<T> comparer)
         {
             if (ReferenceEquals(comparer, null))
+            {
+                if (!(typeof(T).GetInterfaces().Contains(typeof(IComparable)) || typeof(T).GetInterfaces().Contains(typeof(IComparable<T>))
+                      || typeof(T).GetInterfaces().Contains(typeof(IComparer)) || typeof(T).GetInterfaces().Contains(typeof(IComparer<T>))))
+                    throw new ArgumentNullException();
                 comparer = Comparer<T>.Default;
+            }
             Root = null;
             _comparer = comparer;
         }
@@ -52,7 +60,12 @@ namespace GenericBinarySearchTree
         public BinarySearchTree(Comparison<T> comparision)
         {
             if (ReferenceEquals(comparision, null))
+            {
+                if (!(typeof(T).GetInterfaces().Contains(typeof(IComparable)) || typeof(T).GetInterfaces().Contains(typeof(IComparable<T>))
+                      || typeof(T).GetInterfaces().Contains(typeof(IComparer)) || typeof(T).GetInterfaces().Contains(typeof(IComparer<T>))))
+                    throw new ArgumentNullException();
                 comparision = Comparer<T>.Default.Compare;
+            }
             Root = null;
             _comparer = Comparer<T>.Create(comparision);
         }
@@ -72,17 +85,24 @@ namespace GenericBinarySearchTree
         }
 
         /// <summary>
+        /// Adds a collection
+        /// </summary>
+        /// <param name="coll">Collection</param>
+        public void Add(IEnumerable<T> coll)
+        {
+            if(coll == null) throw new ArgumentNullException();
+            foreach (var t in coll)
+            {
+                Add(t);
+            }
+        }
+
+        /// <summary>
         /// Finds an element
         /// </summary>
         /// <param name="element">Element to find</param>
         /// <returns>True if exists</returns>
         public bool Contains(T element) => Contains(Root, element);
-
-        //I will write it soon
-        /*public void Remove(T element)
-        {
-
-        }*/
 
         /// <summary>
         /// Clears the tree
@@ -149,6 +169,15 @@ namespace GenericBinarySearchTree
             if (comp == 0) return true;
             else if (comp < 0) return Contains(node.Right, element);
             else return Contains(node.Left, element);
+        }
+
+        private Tuple<Node<T>, Node<T>> GetNode(T value, Node<T> node,Node<T> parent)
+        {
+            if (node == null) return new Tuple<Node<T>, Node<T>>(null, null);
+            int comp = Comparer.Compare(value, node.Value);
+            if (comp == 0) return new Tuple<Node<T>, Node<T>>(node, parent);
+            else if (comp < 0) return GetNode(value, node.Left, node);
+            else return GetNode(value, node.Right, node);
         }
 
         private IEnumerable<T> PreOrder(Node<T> node)

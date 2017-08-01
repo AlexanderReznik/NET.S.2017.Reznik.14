@@ -23,7 +23,7 @@ namespace GenericMatrix
         /// <summary>
         /// Dimension of square matrix
         /// </summary>
-        public int Size => _size;
+        public override int Size => _size;
 
         /// <summary>
         /// Number of rows

@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericMatrix.NUnitTests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericBinarySearchTree", "GenericBinarySearchTree\GenericBinarySearchTree.csproj", "{9AC3D380-53C4-423D-9253-8143B1472C8D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericBinarySearchTree.NUnitTests", "GenericBinarySearchTree.NUnitTests\GenericBinarySearchTree.NUnitTests.csproj", "{DA85A3D8-F1C0-4F25-BF5F-CC9BDE6D3A2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{9AC3D380-53C4-423D-9253-8143B1472C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AC3D380-53C4-423D-9253-8143B1472C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AC3D380-53C4-423D-9253-8143B1472C8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA85A3D8-F1C0-4F25-BF5F-CC9BDE6D3A2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA85A3D8-F1C0-4F25-BF5F-CC9BDE6D3A2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA85A3D8-F1C0-4F25-BF5F-CC9BDE6D3A2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA85A3D8-F1C0-4F25-BF5F-CC9BDE6D3A2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

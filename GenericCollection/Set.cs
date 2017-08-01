@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GenericCollection
 {
-    public class Set<T> : IEnumerable<T>, IEquatable<Set<T>> where T : class, IEquatable<T>
+    public class Set<T> : IEnumerable<T>, IEquatable<Set<T>> where T : class
     {
         #region fields
 
@@ -28,6 +28,8 @@ namespace GenericCollection
             }
         }
 
+        private IEqualityComparer<T> Comparer;
+
         /// <summary>
         /// Number of elements in set
         /// </summary>
@@ -39,19 +41,23 @@ namespace GenericCollection
 
         #region c-tors
 
-        public Set() : this(DefaultCapacity)
-        {
-        }
+        public Set() : this(DefaultCapacity, EqualityComparer<T>.Default) { }
 
-        public Set(int capacity)
+        public Set(int capacity) : this(capacity, EqualityComparer<T>.Default) { }
+
+        public Set(int capacity, IEqualityComparer<T> comp)
         {
+            Comparer = comp ?? EqualityComparer<T>.Default;
             if (capacity < 1) throw new ArgumentException($"{nameof(capacity)} must be positive.");
             Array = new T[capacity];
             Size = 0;
         }
 
-        public Set(IEnumerable<T> collection)
+        public Set(IEnumerable<T> collection) : this(collection, EqualityComparer<T>.Default) { }
+
+        public Set(IEnumerable<T> collection, IEqualityComparer<T> comp)
         {
+            Comparer = comp ?? EqualityComparer<T>.Default;
             Array = new T[DefaultCapacity];
             foreach (var item in collection)
             {
@@ -85,7 +91,7 @@ namespace GenericCollection
         {
             if (!Contains(item)) return false;
             for(int i = 0; i < Size; i++)
-                if (item.Equals(Array[i]))
+                if (Comparer.Equals(item, Array[i]))
                 {
                     Swap(ref Array[i], ref Array[Size - 1]);
                     Array[--Size] = null;
@@ -102,7 +108,7 @@ namespace GenericCollection
         {
             Check(item);
             for(int i = 0; i < Capacity; i++)
-                if (item.Equals(Array[i])) return true;
+                if (Comparer.Equals(item, Array[i])) return true;
             return false;
         }
 

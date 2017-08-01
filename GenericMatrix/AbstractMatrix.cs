@@ -50,6 +50,9 @@ namespace GenericMatrix
         /// Number of columns
         /// </summary>
         public virtual int N { get; }
+
+        public virtual int Size { get; }
+
         protected T[] Array => _array;
 
         #endregion

@@ -10,15 +10,30 @@ namespace GenericMatrix
     /// Abstract matrix
     /// </summary>
     /// <typeparam name="T">Param</typeparam>
-    public class DiagonalMatrix<T> : SymetricMatrix<T>
+    public class DiagonalMatrix<T> : AbstractMatrix<T>
     {
         /// <summary>
         /// C-tor
         /// </summary>
         /// <param name="size"></param>
-        public DiagonalMatrix(int size) : this(size, size) { }
+        public DiagonalMatrix(int size) : base(size, size, size)
+        {
+            _size = size;
+        }
 
-        protected DiagonalMatrix(int size, int arraydimension) : base(size, arraydimension) { }
+        private readonly int _size;
+
+        public override int Size => _size;
+
+        /// <summary>
+        /// Number of rows
+        /// </summary>
+        public override int M => Size;
+
+        /// <summary>
+        /// Number of columns
+        /// </summary>
+        public override int N => Size;
 
         /// <summary>
         /// Indexer

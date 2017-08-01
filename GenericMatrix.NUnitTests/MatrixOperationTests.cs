@@ -21,7 +21,7 @@ namespace GenericMatrix.NUnitTests
             for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
                 m2[i, j] = 3 * i + j;
-            AbstractMatrix<int> m = Sum(m1, m2);
+            AbstractMatrix<int> m = Add(m1, m2);
             for (int i = 0; i < 3; i++)
                 for (int j = 0; j < 3; j++)
                     Assert.AreEqual(m[i, j], 2*(3 * i + j));
@@ -38,7 +38,7 @@ namespace GenericMatrix.NUnitTests
             for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
                 m2[i, j] = 1;
-            AbstractMatrix<int> m = Sum(m1, m2);
+            AbstractMatrix<int> m = Add(m1, m2);
             for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
                 Assert.AreEqual(m[i, j], 1 + 3 * i + j);
@@ -52,7 +52,7 @@ namespace GenericMatrix.NUnitTests
             for (int j = 0; j < 3; j++)
                 m2[i, j] = 1;
             SymetricMatrix<int> m1 = m2;
-            AbstractMatrix<int> m = Sum(m1, m2);
+            AbstractMatrix<int> m = Add(m1, m2);
             for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
                 Assert.AreEqual(m[i, j], 2 * m1[i, j]);
@@ -68,7 +68,7 @@ namespace GenericMatrix.NUnitTests
             DiagonalMatrix<int> m1 = new DiagonalMatrix<int>(3);
             for (int i = 0; i < 3; i++)
                 m1[i, i] = 1;
-            AbstractMatrix<int> m = Sum(m1, m2);
+            AbstractMatrix<int> m = Add(m1, m2);
             for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
                 Assert.AreEqual(m[i, j], i == j ? 2 : 1);
@@ -83,7 +83,7 @@ namespace GenericMatrix.NUnitTests
             DiagonalMatrix<int> m1 = new DiagonalMatrix<int>(3);
             for (int i = 0; i < 3; i++)
                 m1[i, i] = 1;
-            AbstractMatrix<int> m = Sum(m1, m2);
+            AbstractMatrix<int> m = Add(m1, m2);
             for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
                 Assert.AreEqual(m[i, j], i == j ? 6 : 0);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +20,19 @@ namespace GenericMatrix
         /// <param name="lhs">First matrix</param>
         /// <param name="rhs">Second matrix</param>
         /// <returns>Sum of the first and the second</returns>
-        public static DiagonalMatrix<T> Sum<T>(DiagonalMatrix<T> lhs, DiagonalMatrix<T> rhs)
+        public static AbstractMatrix<T> Add<T>(AbstractMatrix<T> lhs, AbstractMatrix<T> rhs)
+        {
+            return Sum((dynamic) lhs, (dynamic) rhs);
+        }
+
+        /// <summary>
+        /// Adding matrix
+        /// </summary>
+        /// <typeparam name="T">Param of matrix</typeparam>
+        /// <param name="lhs">First matrix</param>
+        /// <param name="rhs">Second matrix</param>
+        /// <returns>Sum of the first and the second</returns>
+        private static DiagonalMatrix<T> Sum<T>(DiagonalMatrix<T> lhs, DiagonalMatrix<T> rhs)
         {
             Check(lhs, rhs);
             DiagonalMatrix<T> answer = new DiagonalMatrix<T>(lhs.Size);
@@ -35,7 +48,7 @@ namespace GenericMatrix
         /// <param name="lhs">First matrix</param>
         /// <param name="rhs">Second matrix</param>
         /// <returns>Sum of the first and the second</returns>
-        public static SymetricMatrix<T> Sum<T>(SymetricMatrix<T> lhs, SymetricMatrix<T> rhs)
+        private static SymetricMatrix<T> Sum<T>(SymetricMatrix<T> lhs, SymetricMatrix<T> rhs)
         {
             Check(lhs, rhs);
             SymetricMatrix<T> answer = new SymetricMatrix<T>(lhs.Size);
@@ -52,7 +65,7 @@ namespace GenericMatrix
         /// <param name="lhs">First matrix</param>
         /// <param name="rhs">Second matrix</param>
         /// <returns>Sum of the first and the second</returns>
-        public static SquareMatrix<T> Sum<T>(SquareMatrix<T> lhs, SquareMatrix<T> rhs)
+        private static SquareMatrix<T> Sum<T>(SquareMatrix<T> lhs, SquareMatrix<T> rhs)
         {
             Check(lhs, rhs);
             SquareMatrix<T> answer = new SquareMatrix<T>(lhs.Size);
@@ -61,6 +74,30 @@ namespace GenericMatrix
                     answer[i, j] = (dynamic)lhs[i, j] + rhs[i, j];
             return answer;
         }
+
+        private static SquareMatrix<T> Sum<T>(SquareMatrix<T> lhs, DiagonalMatrix<T> rhs)
+        {
+            Check(lhs, rhs);
+            SquareMatrix<T> answer = new SquareMatrix<T>(lhs.Size);
+            for (int i = 0; i < lhs.Size; i++)
+            for (int j = 0; j < lhs.Size; j++)
+                answer[i, j] = (dynamic)lhs[i, j] + rhs[i, j];
+            return answer;
+        }
+
+        private static SquareMatrix<T> Sum<T>(DiagonalMatrix<T> lhs, SquareMatrix<T> rhs) => Sum(rhs, lhs);
+
+        private static SymetricMatrix<T> Sum<T>(SymetricMatrix<T> lhs, DiagonalMatrix<T> rhs)
+        {
+            Check(lhs, rhs);
+            SymetricMatrix<T> answer = new SymetricMatrix<T>(lhs.Size);
+            for (int i = 0; i < lhs.Size; i++)
+            for (int j = 0; j <= i; j++)
+                answer[i, j] = (dynamic)lhs[i, j] + rhs[i, j];
+            return answer;
+        }
+
+        private static SquareMatrix<T> Sum<T>(DiagonalMatrix<T> lhs, SymetricMatrix<T> rhs) => Sum(rhs, lhs);
 
         private static void Check<T>(AbstractMatrix<T> lhs, AbstractMatrix<T> rhs)
         {

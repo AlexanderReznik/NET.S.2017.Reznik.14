@@ -28,7 +28,7 @@ namespace GenericCollection
             }
         }
 
-        private IEqualityComparer<T> Comparer;
+        private readonly IEqualityComparer<T> _comparer;
 
         /// <summary>
         /// Number of elements in set
@@ -47,7 +47,7 @@ namespace GenericCollection
 
         public Set(int capacity, IEqualityComparer<T> comp)
         {
-            Comparer = comp ?? EqualityComparer<T>.Default;
+            _comparer = comp ?? EqualityComparer<T>.Default;
             if (capacity < 1) throw new ArgumentException($"{nameof(capacity)} must be positive.");
             Array = new T[capacity];
             Size = 0;
@@ -57,7 +57,7 @@ namespace GenericCollection
 
         public Set(IEnumerable<T> collection, IEqualityComparer<T> comp)
         {
-            Comparer = comp ?? EqualityComparer<T>.Default;
+            _comparer = comp ?? EqualityComparer<T>.Default;
             Array = new T[DefaultCapacity];
             foreach (var item in collection)
             {
@@ -91,7 +91,7 @@ namespace GenericCollection
         {
             if (!Contains(item)) return false;
             for(int i = 0; i < Size; i++)
-                if (Comparer.Equals(item, Array[i]))
+                if (_comparer.Equals(item, Array[i]))
                 {
                     Swap(ref Array[i], ref Array[Size - 1]);
                     Array[--Size] = null;
@@ -108,7 +108,7 @@ namespace GenericCollection
         {
             Check(item);
             for(int i = 0; i < Capacity; i++)
-                if (Comparer.Equals(item, Array[i])) return true;
+                if (_comparer.Equals(item, Array[i])) return true;
             return false;
         }
 
@@ -127,7 +127,7 @@ namespace GenericCollection
         /// <param name="set">another set</param>
         public void Add(Set<T> set)
         {
-            if(ReferenceEquals(set, null)) throw new ArgumentNullException();
+            if(set == null) throw new ArgumentNullException();
             foreach (var item in set)
             {
                 Add(item);
@@ -140,7 +140,7 @@ namespace GenericCollection
         /// <param name="set">another set</param>
         public void Remove(Set<T> set)
         {
-            if (ReferenceEquals(set, null)) throw new ArgumentNullException();
+            if (set == null) throw new ArgumentNullException();
             foreach (var item in set)
             {
                 Remove(item);
@@ -154,7 +154,7 @@ namespace GenericCollection
         /// <returns>True if subset</returns>
         public bool Contains(Set<T> set)
         {
-            if (ReferenceEquals(set, null)) throw new ArgumentNullException();
+            if (set == null) throw new ArgumentNullException();
             foreach (var item in set)
             {
                 if (!Contains(item)) return false;
@@ -170,8 +170,8 @@ namespace GenericCollection
         /// <returns>Intersection</returns>
         public static Set<T> Intersection(Set<T> lhs, Set<T> rhs)
         {
-            if (ReferenceEquals(lhs, null)) throw new ArgumentNullException();
-            if (ReferenceEquals(rhs, null)) throw new ArgumentNullException();
+            if (lhs == null) throw new ArgumentNullException();
+            if (rhs == null) throw new ArgumentNullException();
             Set<T> ans = new Set<T>();
             foreach (var item in lhs)
             {
@@ -188,8 +188,8 @@ namespace GenericCollection
         /// <returns>Union</returns>
         public static Set<T> Union(Set<T> lhs, Set<T> rhs)
         {
-            if (ReferenceEquals(lhs, null)) throw new ArgumentNullException();
-            if (ReferenceEquals(rhs, null)) throw new ArgumentNullException();
+            if (lhs == null) throw new ArgumentNullException();
+            if (rhs == null) throw new ArgumentNullException();
             Set<T> ans = new Set<T>();
             foreach (var item in lhs)
             {
@@ -210,8 +210,8 @@ namespace GenericCollection
         /// <returns>SymmetricDifference</returns>
         public static Set<T> SymmetricDifference(Set<T> lhs, Set<T> rhs)
         {
-            if (ReferenceEquals(lhs, null)) throw new ArgumentNullException();
-            if (ReferenceEquals(rhs, null)) throw new ArgumentNullException();
+            if (lhs == null) throw new ArgumentNullException();
+            if (rhs == null) throw new ArgumentNullException();
             Set <T> ans= Union(lhs, rhs);
             ans.Remove(Intersection(lhs, rhs));
             return ans;
@@ -225,8 +225,8 @@ namespace GenericCollection
         /// <returns>Complement</returns>
         public static Set<T> Complement(Set<T> lhs, Set<T> rhs)
         {
-            if (ReferenceEquals(lhs, null)) throw new ArgumentNullException();
-            if (ReferenceEquals(rhs, null)) throw new ArgumentNullException();
+            if (lhs == null) throw new ArgumentNullException();
+            if (rhs == null) throw new ArgumentNullException();
             Set<T> ans = new Set<T>(lhs);
             ans.Remove(rhs);
             return ans;
@@ -239,7 +239,7 @@ namespace GenericCollection
         /// <returns>true if equals</returns>
         public bool Equals(Set<T> other)
         {
-            if(ReferenceEquals(other, null)) throw new ArgumentNullException();
+            if (other == null) throw new ArgumentNullException();
 
             if (Size != other.Size) return false;
             foreach (var item in other)
@@ -274,7 +274,7 @@ namespace GenericCollection
 
         private void Check(T item)
         {
-            if (ReferenceEquals(item, null)) throw new ArgumentNullException();
+            if (item == null) throw new ArgumentNullException();
         }
         private void Check(T lhs, T rhs)
         {

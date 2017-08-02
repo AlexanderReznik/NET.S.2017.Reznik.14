@@ -20,27 +20,10 @@ namespace GenericMatrix
 
         protected SymetricMatrix(int size, int arraydimension) : base(size, arraydimension) {}
 
-        /// <summary>
-        /// Indexer
-        /// </summary>
-        /// <param name="i">row</param>
-        /// <param name="j">column</param>
-        /// <returns>Element</returns>
-        public override T this[int i, int j]
+        protected override int GetArrayIndex(int i, int j)
         {
-            get
-            {
-                CheckIndexes(i, j);
-                if (i >= j) return Array[i * (i + 1) / 2 + j];
-                else return Array[j * (j + 1) / 2 + i];
-            }
-            set
-            {
-                CheckIndexes(i, j);
-                if (i >= j) Array[i * (i + 1) / 2 + j] = value;
-                else Array[j * (j + 1) / 2 + i] = value;
-                OnChange(new ChangeEventArgs(i, j, "Symetric Matrix"));
-            }
+            if (i >= j) return i * (i + 1) / 2 + j;
+            else return j * (j + 1) / 2 + i;
         }
     }
 }

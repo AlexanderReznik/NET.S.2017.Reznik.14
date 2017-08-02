@@ -29,10 +29,8 @@ namespace GenericBinarySearchTree
         /// </summary>
         public BinarySearchTree()
         {
-            if (!(typeof(T).GetInterfaces().Contains(typeof(IComparable)) || typeof(T).GetInterfaces().Contains(typeof(IComparable<T>))
-                || typeof(T).GetInterfaces().Contains(typeof(IComparer)) || typeof(T).GetInterfaces().Contains(typeof(IComparer<T>))))
-                throw new InvalidOperationException("No default comparer. Use another c-tor.");
-                Root = null;
+            CheckComparer("No default comparer. Use another c-tor.");
+            Root = null;
             _comparer = Comparer<T>.Default;
         }
 
@@ -44,9 +42,7 @@ namespace GenericBinarySearchTree
         {
             if (ReferenceEquals(comparer, null))
             {
-                if (!(typeof(T).GetInterfaces().Contains(typeof(IComparable)) || typeof(T).GetInterfaces().Contains(typeof(IComparable<T>))
-                      || typeof(T).GetInterfaces().Contains(typeof(IComparer)) || typeof(T).GetInterfaces().Contains(typeof(IComparer<T>))))
-                    throw new ArgumentNullException();
+                CheckComparer();
                 comparer = Comparer<T>.Default;
             }
             Root = null;
@@ -61,9 +57,7 @@ namespace GenericBinarySearchTree
         {
             if (ReferenceEquals(comparision, null))
             {
-                if (!(typeof(T).GetInterfaces().Contains(typeof(IComparable)) || typeof(T).GetInterfaces().Contains(typeof(IComparable<T>))
-                      || typeof(T).GetInterfaces().Contains(typeof(IComparer)) || typeof(T).GetInterfaces().Contains(typeof(IComparer<T>))))
-                    throw new ArgumentNullException();
+                CheckComparer();
                 comparision = Comparer<T>.Default.Compare;
             }
             Root = null;
@@ -211,6 +205,13 @@ namespace GenericBinarySearchTree
                 foreach (var n in PostOrder(node.Right))
                     yield return n;
             yield return node.Value;
+        }
+
+        private void CheckComparer(string s = "")
+        {
+                if (!(typeof(T).GetInterfaces().Contains(typeof(IComparable)) || typeof(T).GetInterfaces().Contains(typeof(IComparable<T>))
+                      || typeof(T).GetInterfaces().Contains(typeof(IComparer)) || typeof(T).GetInterfaces().Contains(typeof(IComparer<T>))))
+                    throw new ArgumentNullException(s);
         }
 
         #endregion

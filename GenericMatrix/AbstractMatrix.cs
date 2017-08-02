@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GenericMatrix
 {
@@ -29,17 +25,17 @@ namespace GenericMatrix
         /// <param name="i">row</param>
         /// <param name="j">column</param>
         /// <returns>Element</returns>
-        public virtual T this[int i, int j] {
+        public T this[int i, int j] {
             get
             {
-                CheckIndexes(i, j);
-                return Array[i*N + j];
+                if(!CheckIndexes(i, j)) return default(T);
+                return Array[GetArrayIndex(i, j)];
             }
             set
             {
-                CheckIndexes(i, j);
-                Array[i*N + j] = value;
-                OnChange(new ChangeEventArgs(i, j, "Matrix"));
+                CheckIndexesSet(i, j);
+                Array[GetArrayIndex(i, j)] = value;
+                OnChange(new ChangeEventArgs(i, j, "Changed"));
             }
         }
         /// <summary>
@@ -50,8 +46,6 @@ namespace GenericMatrix
         /// Number of columns
         /// </summary>
         public virtual int N { get; }
-
-        public virtual int Size { get; }
 
         protected T[] Array => _array;
 
@@ -65,26 +59,12 @@ namespace GenericMatrix
             N = n;
         }
 
-        /// <summary>
-        /// String representation
-        /// </summary>
-        /// <returns>String</returns>
-        public override string ToString()
-        {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < M; i++)
-            {
-                for (int j = 0; j < N; j++)
-                {
-                    sb.Append(this[i, j]);
-                    sb.Append(" ");
-                }
-                sb.Append(Environment.NewLine);
-            }
-            return sb.ToString();
-        }
-
         #region private
+
+        protected virtual int GetArrayIndex(int i, int j)
+        {
+            return i * N + j;
+        }
 
         protected void OnChange(ChangeEventArgs e)
         {
@@ -92,7 +72,14 @@ namespace GenericMatrix
             temp?.Invoke(this, e);
         }
 
-        protected void CheckIndexes(int i, int j)
+        protected virtual bool CheckIndexes(int i, int j)
+        {
+            if (i < 0 || i >= M) throw new ArgumentException($"{nameof(i)} must be from 0 to matrix number of rows({M}).");
+            if (j < 0 || j >= N) throw new ArgumentException($"{nameof(j)} must be from 0 to matrix number of columns({N}).");
+            return true;
+        }
+
+        protected virtual void CheckIndexesSet(int i, int j)
         {
             if (i < 0 || i >= M) throw new ArgumentException($"{nameof(i)} must be from 0 to matrix number of rows({M}).");
             if (j < 0 || j >= N) throw new ArgumentException($"{nameof(j)} must be from 0 to matrix number of columns({N}).");
@@ -108,25 +95,21 @@ namespace GenericMatrix
 
 public sealed class ChangeEventArgs : EventArgs
 {
-    #region fields
-    private readonly int i;
-    private readonly int j;
-    private readonly string message;
-    #endregion
-
     #region ctor
     public ChangeEventArgs(int i, int j, string message)
     {
-        this.i = i;
-        this.j = j;
-        this.message = message;
+        I = i;
+        J = j;
+        Message = message;
     }
     #endregion
 
     #region properties
-    public int I { get { return i; } }
-    public int J { get { return j; } }
-    public string Message { get { return message; } }
+
+    public int I { get; }
+    public int J { get; }
+    public string Message { get; }
+
     #endregion
 }
 #endregion

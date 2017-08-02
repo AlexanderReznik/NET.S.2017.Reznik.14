@@ -14,20 +14,26 @@ namespace Fibonacci
         /// </summary>
         /// <param name="n">How many numbers you want to see</param>
         /// <returns>IEnumerable with fibonacci numbers</returns>
-        public static IEnumerable<BigInteger> Generate(long n)
+        public static IEnumerable<BigInteger> Generate(long number)
         {
-            if(n < 1) throw new ArgumentException();
+            if(number < 1) throw new ArgumentException();
+            
 
-            BigInteger previous = 0;
-            BigInteger current = 1;
-            yield return 1;
-            for (long i = 0; i < n - 1; i++)
+            IEnumerable<BigInteger> GenerateIn(long n)
             {
-                BigInteger temp = current;
-                current += previous;
-                previous = temp;
-                yield return current;
+                BigInteger previous = 0;
+                BigInteger current = 1;
+                yield return 1;
+                for (long i = 0; i < n - 1; i++)
+                {
+                    BigInteger temp = current;
+                    current += previous;
+                    previous = temp;
+                    yield return current;
+                }
             }
+
+            return GenerateIn(number);
         }
     }
 }

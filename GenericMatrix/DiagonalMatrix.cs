@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GenericMatrix
 {
@@ -23,38 +19,28 @@ namespace GenericMatrix
 
         private readonly int _size;
 
-        public override int Size => _size;
-
         /// <summary>
         /// Number of rows
         /// </summary>
-        public override int M => Size;
+        public override int M => _size;
 
         /// <summary>
         /// Number of columns
         /// </summary>
-        public override int N => Size;
+        public override int N => _size;
 
-        /// <summary>
-        /// Indexer
-        /// </summary>
-        /// <param name="i">row</param>
-        /// <param name="j">column</param>
-        /// <returns>Element</returns>
-        public override T this[int i, int j]
+        protected override int GetArrayIndex(int i, int j) => i;
+
+        protected override void CheckIndexesSet(int i, int j)
         {
-            get
-            {
-                CheckIndexes(i, j);
-                if (i != j) return default(T);
-                else return Array[i];
-            }
-            set {
-                CheckIndexes(i, j);
-                if (i != j) throw new InvalidOperationException();
-                else Array[i] = value;
-                OnChange(new ChangeEventArgs(i, j, "Diagonal Matrix"));
-            }
+            base.CheckIndexesSet(i, j);
+            if(i != j) throw new InvalidOperationException("Can not change not diagonal element.");
+        }
+
+        protected override bool CheckIndexes(int i, int j)
+        {
+            base.CheckIndexes(i, j);
+            return i == j;
         }
     }
 }

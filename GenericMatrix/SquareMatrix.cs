@@ -21,41 +21,15 @@ namespace GenericMatrix
         #region Properties
 
         /// <summary>
-        /// Dimension of square matrix
-        /// </summary>
-        public override int Size => _size;
-
-        /// <summary>
         /// Number of rows
         /// </summary>
-        public override int M => Size;
+        public override int M => _size;
 
         /// <summary>
         /// Number of columns
         /// </summary>
-        public override int N => Size;
-
-        /// <summary>
-        /// Indexer
-        /// </summary>
-        /// <param name="i">row</param>
-        /// <param name="j">column</param>
-        /// <returns>Element</returns>
-        public override T this[int i, int j]
-        {
-            get
-            {
-                CheckIndexes(i, j);
-                return Array[i*Size + j];
-            }
-            set
-            {
-                CheckIndexes(i, j);
-                Array[i*Size + j] = value;
-                OnChange(new ChangeEventArgs(i, j, "Square Matrix"));
-            }
-        }
-
+        public override int N => _size;
+        
         #endregion
 
         #region C-tor
@@ -75,7 +49,7 @@ namespace GenericMatrix
 
         #region Private
 
-        
+        protected override int GetArrayIndex(int i, int j) => i * N + j;
 
         #endregion
     }

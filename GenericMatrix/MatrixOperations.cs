@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace GenericMatrix
 {
@@ -31,7 +32,7 @@ namespace GenericMatrix
             Check(lhs, rhs);
             DiagonalMatrix<T> answer = new DiagonalMatrix<T>(lhs.M);
             for (int i = 0; i < lhs.M; i++)
-                answer[i, i] = (dynamic)lhs[i, i] + rhs[i, i];
+                answer[i, i] = AddT(lhs[i, i],rhs[i, i]);
             return answer;
         }
 
@@ -48,7 +49,7 @@ namespace GenericMatrix
             SymetricMatrix<T> answer = new SymetricMatrix<T>(lhs.M);
             for (int i = 0; i < lhs.M; i++)
                 for(int j = 0; j <= i; j++)
-                    answer[i, j] = (dynamic)lhs[i, j] + rhs[i, j];
+                    answer[i, j] = AddT(lhs[i, j], rhs[i, j]);
             return answer;
         }
 
@@ -65,7 +66,7 @@ namespace GenericMatrix
             SquareMatrix<T> answer = new SquareMatrix<T>(lhs.M);
             for (int i = 0; i < lhs.M; i++)
                 for (int j = 0; j <lhs.M; j++)
-                    answer[i, j] = (dynamic)lhs[i, j] + rhs[i, j];
+                    answer[i, j] = AddT(lhs[i, j], rhs[i, j]);
             return answer;
         }
 
@@ -75,7 +76,7 @@ namespace GenericMatrix
             SquareMatrix<T> answer = new SquareMatrix<T>(lhs.M);
             for (int i = 0; i < lhs.M; i++)
             for (int j = 0; j < lhs.M; j++)
-                answer[i, j] = (dynamic)lhs[i, j] + rhs[i, j];
+                answer[i, j] = AddT(lhs[i, j], rhs[i, j]);
             return answer;
         }
 
@@ -87,7 +88,7 @@ namespace GenericMatrix
             SymetricMatrix<T> answer = new SymetricMatrix<T>(lhs.M);
             for (int i = 0; i < lhs.M; i++)
             for (int j = 0; j <= i; j++)
-                answer[i, j] = (dynamic)lhs[i, j] + rhs[i, j];
+                answer[i, j] = AddT(lhs[i, j], rhs[i, j]);
             return answer;
         }
 
@@ -97,6 +98,18 @@ namespace GenericMatrix
         {
             if(ReferenceEquals(lhs, null) || ReferenceEquals(rhs, null)) throw new ArgumentNullException();
             if(lhs.M != rhs.M || lhs.N != rhs.N) throw new ArgumentException("Incorrect size.");
+        }
+
+        private static T AddT<T>(T lhs, T rhs)
+        {
+            try
+            {
+                return (dynamic) lhs + rhs;
+            }
+            catch (RuntimeBinderException e)
+            {
+                throw new InvalidOperationException($"Operation + is not defined for {typeof(T)}");
+            }
         }
     }
 }
